@@ -1,1 +1,1 @@
-<img src="https://raw.githubusercontent.com/maurodesouza/maurodesouza/output/snake.svg" alt="Snake animation" />
+![Snake animation](https://github.com/Zeycio/Zeycio/blob/main/dist/github-contribution-grid-snake.svg)
