@@ -11,15 +11,22 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v3
-      - name: Generate snake game from commit history
-        uses: Platane/snk@v2
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: Platane/snk@v3
+        id: snake-gif
         with:
           github_user_name: Zeycio
-          outputs: dist/snake.svg
-      - name: Commit and push the Snake Game SVG
-        uses: stefanzweifel/git-auto-commit-action@v4
+          outputs: |
+            dist/github-snake.svg
+            dist/github-snake-dark.svg?palette=github-dark
+            dist/ocean.gif?color_snake=orange&color_dots=#bfd6f6,#8dbdff,#64a1f4,#4b91f1,#3c7dd9
+
+      - uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
-          commit_message: "Generate Snake Game SVG"
-          file_pattern: dist/snake.svg
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
